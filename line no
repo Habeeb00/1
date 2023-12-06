@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+
+class newchar{
+    public static void main(String[] args) {
+        try{
+            FileReader fr = new FileReader("C:\\Users\\MADHAV\\Desktop\\JAVA\\Internals\\file2.txt");
+            int i,c=1;
+            char ch,ch2='p';
+            System.out.print(c+".");
+            while((i=fr.read()) != -1){
+                ch = (char)i;
+                if(ch == '.'){
+                    c++;
+                    System.out.print("\n"+c+".");
+                }
+                else if(ch == '\n'){
+                    c++;
+                    System.out.print("\n"+c+".");
+                }
+                else{
+                    System.out.print(ch);
+                }
+            }
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+    }
+}
