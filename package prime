@@ -1,0 +1,48 @@
+package primepackage;
+
+public class checkprime {
+    public int check_prime(int n){
+        int flag = 0;
+        if(n == 0 || n == 1){
+            return 1;
+        }
+        else{
+            for(int i=2;i<n;i++){
+                if(n%i == 0){
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0){
+                return 2;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
+}
+
+
+import java.util.*;
+import primepackage.*;
+
+public class primecheck {
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        checkprime c1 = new checkprime();
+        System.out.println("Enter a number");
+        int n = sr.nextInt();
+        int ret = c1.check_prime(n);
+        if(ret == 0){
+            System.out.println("Not prime");
+        }
+        else if(ret == 1){
+            System.out.println("Neither prime nor consonant");
+        }
+        else{
+            System.out.println("Prime");
+        }
+    }
+}
+
