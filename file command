@@ -1,0 +1,25 @@
+import java.util.*;
+import java.io.*;
+
+class filecommand{
+    public static void main(String[] args) {
+        try{
+            FileReader fr = new FileReader(args[0]);
+            FileWriter fw = new FileWriter(args[1]);
+            int i;
+            char ch;
+            while((i=fr.read()) != -1){
+                ch = (char)i;
+                fw.write(ch);
+            }
+            fw.flush();
+            fw.close();
+            fr.close();
+            System.out.println("Content written successfully");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+
