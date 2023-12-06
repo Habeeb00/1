@@ -1,0 +1,57 @@
+import java.util.*;
+
+class Randoms extends Thread{
+    Random rand =  new Random();
+    int no;
+    even e1 = new even();
+    odd o1 = new odd();
+    synchronized public void run(){
+        int c = 1,max = 10,min = 1;
+        for(c=1;c<=10;c++){
+            no = rand.nextInt((max-min+1)+min);
+            if(no == 0){
+                c--;
+                continue;
+            }
+            System.out.println("Random :"+no);
+            try{
+            Thread.sleep(1000);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+            if(no % 2 == 0){
+                e1.run(no);
+            }
+            else{
+                o1.run(no);
+            }
+        }
+        
+    }
+}
+
+class even extends Thread{
+    public void run(int no){
+        int i;
+        for(i=0;i<=no;i=i+2){
+            System.out.println("Even :"+i);
+        }
+    }
+}
+
+class odd extends Thread{
+    public void run(int no){
+        int i;
+        for(i=1;i<=no;i=i+2){
+            System.out.println("Odd :"+i);
+        }
+    }
+}
+
+class randomno{
+    public static void main(String[] args) {
+        Randoms r1 = new Randoms();
+        r1.start();
+    }
+}
