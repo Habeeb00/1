@@ -1,0 +1,118 @@
+import java.util.*;
+import java.text.*;
+class books{
+    int bookno,copies;
+    String book,pubname;
+
+    books(int bno,int cop,String bnam,String pnam){
+        bookno = bno;
+        copies = cop;
+        book = bnam;
+        pubname = pnam;
+    }
+
+    void details(){
+        System.out.println("Book No :"+bookno);
+        System.out.println("Book Name :"+book);
+        System.out.println("Publishers :"+pubname);
+        System.out.println("No.of copies :"+copies);
+    }
+
+    void check(){
+        if(copies == 0){
+            System.out.println("Book is currently unavailable :(");
+        }
+        else{
+            System.out.println("Book is available......!\nNo.of copies left - "+copies);
+        }
+    }
+
+    books(String issue,String Submit){
+        SimpleDateFormat obj = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+            Date date1 = obj.parse(issue);
+            Date date2 = obj.parse(Submit);
+            long difference = date2.getTime() - date1.getTime();
+            long days = (difference/(1000*60*60*24)) % 365;
+            System.out.println(days);
+            if(days>20){
+                days = (int)days -20;
+                int fine = (int)days * 5;
+                System.out.println("fine ="+fine);
+            }
+            else{
+                System.out.println("NO FINE :)");
+            }
+        }
+        catch(ParseException e){
+            System.out.println(e);
+        }
+    }
+}
+
+public class library{
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        int bno,cop,n,i,choice;
+        String bnam,pnam,name;
+        System.out.println("Enter the no.of Books in library");
+        n = sr.nextInt();
+        books b[] = new books[n];
+        for(i=0;i<n;i++){
+            System.out.println("Enter details of Book "+(i+1));
+            System.out.print("book name    :");
+            bnam = sr.next();
+            System.out.print("book No      :");
+            bno = sr.nextInt();
+            System.out.print("Publisher    :");
+            pnam = sr.next();
+            System.out.print("No.of copies :");
+            cop = sr.nextInt();
+            b[i] = new books(bno,cop,bnam,pnam);
+        }
+        System.out.println("1-Book Details\n2-Get a BooK\n3-Return a book\n4-Exit\n");
+        do{
+            System.out.println("Enter your choice");
+            choice = sr.nextInt();
+            switch(choice){
+                case 1 :System.out.println("Enter name of Book");
+                        name = sr.next();
+                        for(i=0;i<n;i++){
+                            if(b[i].book.equals(name)){
+                                System.out.println("BOOK FOUND :)\nDetails :");
+                                b[i].details();
+                                break;
+                            }
+                        }
+                        if(i>=n){
+                            System.out.println("BOOK NOT IN DATABASE");
+                        }
+                        break;
+                case 2 :System.out.println("Enter name of book");
+                        name = sr.next();
+                        for(i=0;i<n;i++){
+                            if(b[i].book.equals(name)){
+                                System.out.println("BOOK FOUND :)\n");
+                                b[i].check();
+                                break;
+                            }
+                        }
+                        if(i>=n){
+                            System.out.println("BOOK NOT IN DATABASE");
+                        }
+                        break;
+                case 3 :System.out.println("Enter issue date :(DD-MM-YYYY)");
+                        String issue = sr.next();
+                        System.out.println("Enter Submit date :(DD-MM-YYYY)");
+                        String submit = sr.next();
+                        books ret = new books(issue,submit);
+                        break;
+                case 4 :System.out.println("Program Exited.....!\nThank you :)");
+                        break;
+                default :System.out.println("Invalid choice :[");
+            }
+        }while(choice != 4);
+    }
+    
+    
+}
