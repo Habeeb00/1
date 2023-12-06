@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+
+class filepalin{
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        System.out.println("Enter a palindrome String");
+        String str = sr.next();
+        String nstr = "";
+        char ch;
+        char chr[] = new char[20];
+        int i,count;
+        for(i=0;i<str.length();i++){
+            ch = str.charAt(i);
+            nstr = ch + nstr;
+        }
+        if(str.equals(nstr)){
+            try{
+                FileWriter fw = new FileWriter("C:\\Users\\MADHAV\\Desktop\\JAVA\\Internals\\file1.txt");
+                fw.write(nstr);
+                fw.flush();
+                fw.close();
+                System.out.println("File Written Successfully :)");
+                FileReader fr = new FileReader("C:\\Users\\MADHAV\\Desktop\\JAVA\\Internals\\file1.txt");
+                int j=0;
+                while((i=fr.read()) != -1){
+                    chr[j] = (char)i;
+                    j++;
+                }
+                for(char c = 'a';c<='z';c++){
+                    for(i=0,count = 0;i<j;i++){
+                        if(chr[i] == c){
+                            count++;
+                        }
+                    }
+                    if(count != 0){
+                        System.out.println(c+" repeats "+count+" times.");
+                    }
+                }
+            }
+            catch(IOException e){
+                System.out.println(e);
+            }
+        }
+        else{
+            System.out.println("String is NOT Palindrome :(\nEnter Palindrome String.....!)");
+        }
+    }
+}
