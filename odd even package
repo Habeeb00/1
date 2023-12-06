@@ -1,0 +1,30 @@
+package evenpackage;
+
+public class checkeven {
+    public static int check_even(int number){
+        if(number%2 ==  0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+}
+
+import evenpackage.*;
+import java.util.*;
+
+public class check{
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        checkeven c1 = new checkeven();
+        System.out.println("Enter a number");
+        int n = sr.nextInt();
+        if(c1.check_even(n) == 1){
+            System.out.println(n+" is EVEN");
+        }
+        else{
+            System.out.println(n+" is ODD");
+        }
+    }
+}
