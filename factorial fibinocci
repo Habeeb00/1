@@ -1,0 +1,100 @@
+import java.util.*;
+
+class resource{
+    synchronized void factorial(){
+        int i;
+        System.out.println("Factorial of first 10 numbers :");
+        for(i=1;i<=10;i++){
+            int fact = 1;
+            for(int j=i;j>0;j--){
+                fact = fact * j;
+            }
+            System.out.println(fact);
+        }
+        try{
+            Thread.sleep(400);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    synchronized void fib(){
+        int a=0,b=1,c;
+        System.out.println("Fibonacci - first 10 terms");
+        System.out.println(a);
+        System.out.println(b);
+        for(int i=3;i<=10;i++){
+           c = a+b;
+           System.out.println(c); 
+           a=b;
+           b=c;
+        }
+        try{
+            Thread.sleep(400);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    synchronized void prime(){
+        int i,c=0,j,flag;
+        System.out.println("First 10 prime numbers");
+        for(i=2;c!=10;i++){
+            flag = 0;
+            for(j=2;j<i;j++){
+                if(i%j == 0){
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0){
+                System.out.println(i);
+                c++;
+            }
+        }
+    }
+}
+class factorials extends Thread{
+    resource r1;
+    factorials(resource obj){
+        r1 = obj;
+    }
+    public void run(){
+        r1.factorial();
+        System.out.println("thread "+Thread.currentThread().getId()+"is running");
+    }
+}
+
+class fibanocci extends Thread{
+    resource r1;
+    fibanocci(resource obj){
+        r1 = obj;
+    }
+    public void run(){
+        r1.fib();
+        System.out.println("thread "+Thread.currentThread().getId()+"is running");
+    }
+}
+
+class primenumber extends Thread{
+    resource r1;
+    primenumber(resource obj){
+        r1 = obj;
+    }
+    public void run(){
+        r1.prime();
+        System.out.println("thread "+Thread.currentThread().getId()+"is running");
+    }
+}
+
+class multi{
+    public static void main(String[] args) {
+        resource obj = new resource();
+        factorials f1 = new factorials(obj);
+        fibanocci fb1 = new fibanocci(obj);
+        primenumber p1 = new primenumber(obj);
+        f1.start();
+        fb1.start();
+        p1.start();
+    }
+}
