@@ -1,0 +1,48 @@
+import java.util.*;
+
+class multiple{
+    synchronized public void getmulti(int n){
+        int ans;
+        for(int i = 1;i<=10;i++){
+            if(i==1){System.out.println("Multiple of "+n);}
+            ans = i*n;
+            System.out.println(ans);
+            try{
+                Thread.sleep(200);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+class multithree extends Thread{
+    multiple m;
+    multithree(multiple obj){
+        m = obj;
+    }
+    public void run(){
+        m.getmulti(3);
+    }
+}
+
+class multifive extends Thread{
+    multiple m;
+    multifive(multiple obj){
+        m = obj;
+    }
+    public void run(){
+        m.getmulti(5);
+    }
+}
+
+class multithread{
+    public static void main(String[] args) {
+        multiple m1 = new multiple();
+        multithree m3 = new multithree(m1);
+        multifive m5 = new multifive(m1);
+        m3.start();
+        m5.start();
+    }
+}
