@@ -1,0 +1,84 @@
+import java.util.*;
+
+class market{
+    int itemno,price,quantity;
+    String name;
+
+    market(int no,int rate,int qn,String item){
+        itemno = no;
+        name = item;
+        price = rate;
+        quantity = qn;
+    }
+
+    void totalstock(){
+        int total;
+        total = price * quantity;
+        System.out.println("Total Stock :"+total+"Rs");
+    }
+
+    void Display(market m[],int n){
+        int i,j;
+        market temp;
+        for(i=0;i<n-1;i++){
+            for(j=0;j<n-i-1;j++){
+                if(m[j].price > m[j+1].price){
+                    temp = m[j];
+                    m[j] = m[j+1];
+                    m[j+1] = temp;
+                }
+            }
+        }
+        System.out.println("****CATALOGUE****");
+        System.out.println("NAME"+"\t\t"+"PRICE/KG"+"\t\t"+"QUANTITY(Kg)");
+        for(i=n-1;i>=0;i--){
+            System.out.println(m[i].name+"\t\t"+m[i].price+"\t\t"+m[i].quantity);
+        }
+    }
+}
+
+class supermarket{
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        int no,rate,n=0,choice,qn,i;
+        String item;
+        System.out.println("****SUPER MARKET****");
+        System.out.println("Enter no.of items");
+        n = sr.nextInt();
+        market m[] = new market[n];
+        for(i=0;i<n;i++){
+            System.out.println("Enter DETAILS :");
+            System.out.print("Item no :");
+            no = sr.nextInt();
+            System.out.print("Item Name :");
+            item = sr.next();
+            System.out.print("Item Quantity :");
+            qn = sr.nextInt();
+            System.out.print("Item Rate :");
+            rate = sr.nextInt();
+            m[i] = new market(no,rate,qn,item);
+        }
+        System.out.println("1-TotalStock\n2-Display catalogue\n3-Exit");
+        do{
+            System.out.println("Enter your choice");
+            choice = sr.nextInt();
+            switch(choice){
+                case 1 :System.out.println("Enter Stock name :");
+                        item = sr.next();
+                        for(i=0;i<n;i++){
+                            if(m[i].name.equals(item)){
+                                m[i].totalstock();
+                                break;
+                            }
+                        }
+                        if(i>=n){System.out.println("Stock not on list");}
+                        break;
+                case 2 :m[1].Display(m, n);
+                        break;
+                case 3 :System.out.println("Exited");
+                        break;
+                default :System.out.println("Invalid");
+                }
+        }while (choice != 4);
+    }
+}
