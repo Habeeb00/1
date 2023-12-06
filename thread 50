@@ -1,0 +1,51 @@
+import java.util.*;
+
+class printme{
+    synchronized public void printdata(int n){
+        for(int i=n;i<=100;i=i+2){
+            if(i == 50){System.out.println("EVEN :");}
+            if(i==51){System.out.println("ODD :");}
+            System.out.println(i);
+            try{
+                Thread.sleep(100);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+        }
+        
+    }
+}
+
+class even extends Thread{
+    printme p;
+    even(printme obj){
+        p = obj;
+    }
+    public void run(){
+        p.printdata(50);
+    }
+}
+
+class odd extends Thread{
+    printme p;
+    odd(printme obj){
+        p = obj;
+    }
+    public void run(){
+      
+        p.printdata(51);
+    }
+}
+
+class oddandeven{
+    public static void main(String[] args) {
+        printme p1 = new printme();
+        even e1 = new even(p1);
+        odd o1 = new odd(p1);
+        
+        e1.start();
+          
+        o1.start();
+    }
+}
