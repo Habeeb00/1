@@ -1,0 +1,30 @@
+import java.util.*;
+
+class InvalidNumberException extends Exception{
+    public InvalidNumberException(String str){
+        super(str);
+    }
+}
+
+class avgexcept{
+    public static void main(String[] args) throws InvalidNumberException {
+        try{
+            int i,total,avg;
+            for(i=0,total = 0;i<(args.length);i++){
+                int n = Integer.parseInt(args[i]);
+                if(n == 0 || n < 0){
+                    throw new InvalidNumberException("Number is Invalid : "+n);
+                }
+                else{
+                    total = total + n;
+                }
+            }
+            avg = total/(args.length);
+            System.out.println("Average = "+avg);
+        }
+        catch(InvalidNumberException e){
+            System.out.println("Exception catched");
+            System.out.println(e);
+        }
+    }
+}
