@@ -1,0 +1,38 @@
+import java.util.*;
+import java.lang.*;
+
+class Evenexception extends Exception{
+    public Evenexception(String str){
+        super(str);
+    }
+}
+
+class Oddexception extends Exception{
+    public Oddexception(String str){
+        super(str);
+    }
+}
+
+public class oddevenexcept{
+    Scanner sr = new Scanner(System.in);
+    void checknumber() throws Evenexception,Oddexception{
+        System.out.println("Enter a number");
+        int n = sr.nextInt();
+        if(n % 2 == 0){
+            throw new Evenexception("The number is even");
+        }
+        else{
+            throw new Oddexception("The number is odd");
+        }
+    } 
+    public static void main(String[] args) {
+        oddevenexcept c1 = new oddevenexcept();
+        try{
+            c1.checknumber();
+        }
+        catch(Exception e){
+            System.out.println("Caught exceptions");
+            System.out.println(e);
+        }
+    }   
+}\
