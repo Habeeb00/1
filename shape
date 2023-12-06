@@ -1,0 +1,84 @@
+import java.util.*;
+
+interface Shape{
+    Scanner sr = new Scanner(System.in);
+    public void getdimension();
+    public void calcarea();
+    public void display();
+}
+
+class rectangle implements Shape{
+    int length,breadth,area;
+    public void getdimension(){
+        System.out.println("Enter length and breadth");
+        length =sr.nextInt();
+        breadth = sr.nextInt();
+    }
+    public void calcarea(){
+        area = length * breadth;
+    }
+    public void display(){
+        System.out.println("Area of Rectangle = "+area);
+    }
+}
+
+class circle implements Shape{
+    float radius,area;
+    public void getdimension(){
+        System.out.println("Enter radius");
+        radius =sr.nextInt();
+    }
+    public void calcarea(){
+        area = radius * 3.14f;
+    }
+    public void display(){
+        System.out.println("Area of Circle = "+area);
+    }
+}
+
+class square implements Shape{
+    int side,area;
+    public void getdimension(){
+        System.out.println("Enter length of a side");
+        side =sr.nextInt();
+    }
+    public void calcarea(){
+        area = 4*side;
+    }
+    public void display(){
+        System.out.println("Area of Square = "+area);
+    }
+}
+
+class shapeinterface{
+    public static void main(String[] args) {
+        int choice;
+        Scanner sr = new Scanner(System.in);
+        System.out.println("***AREA PROGRAM***\n\n1-Rectangle\n2-Square\n3-Circle\n4-Exit");
+        do{
+            System.out.println("Enter choice");
+            choice = sr.nextInt();
+            switch(choice){
+                case 1 :rectangle r1 = new rectangle();
+                        r1.getdimension();
+                        r1.calcarea();
+                        r1.display();
+                        break;
+                case 2 :square s1 = new square();
+                        s1.getdimension();
+                        s1.calcarea();
+                        s1.display();
+                        break;
+                case 3 :circle c1 = new circle();
+                        c1.getdimension();
+                        c1.calcarea();
+                        c1.display();
+                        break;
+                case 4 :System.out.println("Exited....!");
+                        break;
+                default :System.out.println("Invalid");
+            }
+        }while(choice != 4);
+    }
+}
+
